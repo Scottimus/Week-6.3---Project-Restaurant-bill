@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Bill Calculator</title>
+    <link href="style\style.css" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <h1>Restaurant Bill Calculator</h1> 
+    </header>
+    
+    <form class="table" id="myForm">
+        <div class ="row">
+            <label for="tax_percent">Tax percent:</label> 
+            <input type="number" id="tax_percent" 
+                min="0" max="100" step="0.01"><span>%</span> 
+        </div>
+        <br>
+          
+        <div class ="row">
+            <label for="item_price">Price from the menu:</label>
+            <input type="number" id="item_price" 
+                min="0" max="1000" step="0.01">
+        </div>
+        <div class ="row">
+            <label for="tip_percent">Tip percent:</label>
+            <input type="number" id="tip_percent" 
+                min="0" max="200"><span>%</span>
+        </div>
+        <br>
+
+        <div class="bottom">
+            <input type="button" form="myForm" value="Calculate bill"
+            onclick="calculateBill();">
+            <br><br>
+        </div>
+    </form>
+
+    <div id="total">
+        <output id ="price_bill" form="myForm"></output>
+        <br>
+        <output id ="tax_output" form="myForm"></output>
+        <br>
+        <output id ="tip_output" form="myForm"></output>
+        <br>
+        <output id ="total_bill" form="myForm"></output>
+    </div>
+
+    <script>      
+        function calculateBill(){
+            let total_item_price = 0;
+            console.log('calculating bill')
+            let item_price =  parseInt(document.getElementById("item_price").value)
+            let tip_percent = parseInt(document.getElementById("tip_percent").value);
+            let tax_percent = parseInt(document.getElementById("tax_percent").value);
+            let total_bill = parseInt(document.getElementById("total_bill").value);
+
+            console.log(item_price, tip_percent, tax_percent);
+
+            let total = item_price;
+
+            // 13 * 0.01
+            // 5 * 0.01             ///////// How the Math works
+            // 0.13 + 1 = 1.13      ///////// How the Math works
+            // item_price * 1.13
+
+            let tax_percent_decimal = tax_percent * 0.01;
+            let total_tax = item_price * tax_percent_decimal
+            total = total + total_tax
+            
+            let tip_percent_decimal = tip_percent * 0.01
+            let total_tip = total * tip_percent_decimal
+            total = total + total_tip
+
+            //console.log(`item price: ${item_price} / tax decimal: ${tax_percent_decimal} / tax calculated: ${total_tax} / total after tax: ${total_plus_tax} `)
+
+            document.querySelector("#price_bill").innerHTML = `Price: $${item_price}`
+            document.querySelector("#tax_output").innerHTML = `Tax: $${total_tax}`
+            document.querySelector("#tip_output").innerHTML = `Tip: $${total_tip}`
+            document.querySelector("#total_bill").innerHTML = `Total: $${total}`
+        }
+    </script>
+    
+</body>
+</html>

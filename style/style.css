@@ -1,0 +1,14 @@
+
+body {background-color: rgb(206, 228, 221);}
+
+.table {display: table;}
+.row {display: table-row;}
+.row > * {display: table-cell;}
+input:focus:invalid {background-color: rgb(223, 166, 166);}
+input:focus:valid {background-color: rgb(162, 212, 162);}
+
+.table {border-spacing: 5px;}
+.row > :first-child {text-align: right;}
+.row > * {font-size: 15px;}
+
+/* .bottom */
